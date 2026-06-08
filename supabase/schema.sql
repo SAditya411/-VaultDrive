@@ -65,3 +65,4 @@ using (bucket_id = 'vault');
 alter table public.files disable row level security;
 alter table public.folders disable row level security;
 alter table public.notes disable row level security;
+--- my name
