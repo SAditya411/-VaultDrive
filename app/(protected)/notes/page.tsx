@@ -139,44 +139,44 @@ export default function NotesPage() {
         subtitle={`${notes.length} note${notes.length !== 1 ? 's' : ''}`}
       />
 
-      <div className="flex-1 p-6 max-w-7xl mx-auto w-full">
+      <div className="flex-1 p-4 sm:p-6 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-5 min-h-[calc(100vh-120px)]">
-          <aside className="glass-card rounded-2xl border border-white/8 overflow-hidden flex flex-col min-h-[360px]">
-            <div className="p-4 border-b border-white/8 space-y-3">
+          <aside className="glass-card rounded-[1.5rem] border border-white/70 overflow-hidden flex flex-col min-h-[360px]">
+            <div className="p-4 border-b border-white/60 space-y-3">
               <button
                 onClick={handleCreate}
                 disabled={saving}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-sm font-medium shadow-lg shadow-violet-500/20 transition-all disabled:opacity-60"
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-black hover:bg-black/85 text-white text-sm font-medium shadow-lg shadow-black/10 transition-all disabled:opacity-60"
               >
                 {saving ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}
                 New Note
               </button>
 
               <div className="relative">
-                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30" />
+                <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-black/35" />
                 <input
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder="Search notes"
-                  className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder:text-white/25 outline-none focus:border-violet-500/50 focus:bg-white/8 transition-colors"
+                  className="w-full pl-9 pr-3 py-2.5 rounded-full bg-white/50 border border-white/70 text-sm text-black placeholder:text-black/30 outline-none focus:border-black/20 focus:bg-white/70 transition-colors"
                 />
               </div>
             </div>
 
             <div className="flex-1 overflow-y-auto p-2">
               {loading && (
-                <div className="h-48 flex items-center justify-center text-white/35">
+                <div className="h-48 flex items-center justify-center text-black/35">
                   <Loader2 size={20} className="animate-spin" />
                 </div>
               )}
 
               {!loading && notes.length === 0 && (
                 <div className="h-56 flex flex-col items-center justify-center text-center px-6">
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-3">
-                    <NotebookPen size={20} className="text-white/35" />
+                  <div className="w-12 h-12 rounded-2xl bg-white/55 border border-white/70 flex items-center justify-center mb-3">
+                    <NotebookPen size={20} className="text-black/35" />
                   </div>
-                  <p className="text-sm font-medium text-white/65">No notes yet</p>
-                  <p className="text-xs text-white/30 mt-1">Create one to start writing.</p>
+                  <p className="text-sm font-medium text-black/65">No notes yet</p>
+                  <p className="text-xs text-black/35 mt-1">Create one to start writing.</p>
                 </div>
               )}
 
@@ -188,22 +188,22 @@ export default function NotesPage() {
                   <button
                     key={note.id}
                     onClick={() => selectNote(note)}
-                    className={`w-full text-left p-3 rounded-xl transition-colors mb-1.5 ${
+                    className={`w-full text-left p-3 rounded-2xl transition-colors mb-1.5 ${
                       active
-                        ? 'bg-violet-500/15 border border-violet-500/30'
-                        : 'border border-transparent hover:bg-white/6'
+                        ? 'bg-white/72 border border-white/90 shadow-sm'
+                        : 'border border-transparent hover:bg-white/45'
                     }`}
                   >
                     <div className="flex items-start gap-3">
                       <div className={`mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                        active ? 'bg-violet-500/20 text-violet-300' : 'bg-white/5 text-white/35'
+                        active ? 'bg-black text-white' : 'bg-white/55 text-black/35'
                       }`}>
                         <Edit3 size={14} />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-white truncate">{note.title}</p>
-                        <p className="text-xs text-white/35 truncate mt-0.5">{snippet}</p>
-                        <p className="text-[11px] text-white/25 mt-2">{formatDate(note.updated_at)}</p>
+                        <p className="text-sm font-medium text-black truncate">{note.title}</p>
+                        <p className="text-xs text-black/40 truncate mt-0.5">{snippet}</p>
+                        <p className="text-[11px] text-black/30 mt-2">{formatDate(note.updated_at)}</p>
                       </div>
                     </div>
                   </button>
@@ -212,22 +212,22 @@ export default function NotesPage() {
             </div>
           </aside>
 
-          <section className="glass-card rounded-2xl border border-white/8 overflow-hidden flex flex-col min-h-[520px]">
+          <section className="glass-card rounded-[1.5rem] border border-white/70 overflow-hidden flex flex-col min-h-[520px]">
             {selectedNote ? (
               <>
-                <div className="p-5 border-b border-white/8 flex flex-col sm:flex-row gap-3 sm:items-center">
+                <div className="p-5 border-b border-white/60 flex flex-col sm:flex-row gap-3 sm:items-center">
                   <input
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                     placeholder="Note title"
-                    className="flex-1 min-w-0 bg-transparent text-xl font-semibold text-white placeholder:text-white/25 outline-none"
+                    className="flex-1 min-w-0 bg-transparent text-xl font-semibold text-black placeholder:text-black/30 outline-none"
                   />
                   <div className="flex items-center gap-2">
-                    {hasChanges && <span className="text-xs text-amber-300/80 px-2">Unsaved</span>}
+                    {hasChanges && <span className="text-xs text-amber-700/80 px-2">Unsaved</span>}
                     <button
                       onClick={handleSave}
                       disabled={saving || !hasChanges}
-                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/8 border border-white/10 text-sm text-white/75 hover:text-white hover:bg-white/12 transition-colors disabled:opacity-45"
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-black text-sm text-white hover:bg-black/85 transition-colors disabled:opacity-45"
                     >
                       {saving ? <Loader2 size={15} className="animate-spin" /> : <Save size={15} />}
                       Save
@@ -235,7 +235,7 @@ export default function NotesPage() {
                     <button
                       onClick={handleDelete}
                       disabled={deleting}
-                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-300 hover:bg-red-500/15 transition-colors disabled:opacity-45"
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-sm text-red-700 hover:bg-red-500/15 transition-colors disabled:opacity-45"
                     >
                       {deleting ? <Loader2 size={15} className="animate-spin" /> : <Trash2 size={15} />}
                       Delete
@@ -247,10 +247,10 @@ export default function NotesPage() {
                   value={content}
                   onChange={(event) => setContent(event.target.value)}
                   placeholder="Write your note here..."
-                  className="flex-1 w-full resize-none bg-transparent p-5 text-sm leading-7 text-white/80 placeholder:text-white/25 outline-none"
+                  className="flex-1 w-full resize-none bg-white/16 p-5 text-sm leading-7 text-black/75 placeholder:text-black/30 outline-none"
                 />
 
-                <div className="px-5 py-3 border-t border-white/8 flex items-center justify-between text-xs text-white/30">
+                <div className="px-5 py-3 border-t border-white/60 flex items-center justify-between text-xs text-black/35">
                   <span>Updated {formatDate(selectedNote.updated_at)}</span>
                   <span>{content.length} characters</span>
                 </div>
@@ -263,10 +263,10 @@ export default function NotesPage() {
                   className="text-center max-w-sm"
                 >
                   <div className="mx-auto w-16 h-16 rounded-2xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center mb-4">
-                    <NotebookPen size={26} className="text-violet-300" />
+                    <NotebookPen size={26} className="text-black/65" />
                   </div>
-                  <h3 className="text-base font-semibold text-white mb-1">Open a note</h3>
-                  <p className="text-sm text-white/35">Select a note from the list or create a new one.</p>
+                  <h3 className="text-base font-semibold text-black mb-1">Open a note</h3>
+                  <p className="text-sm text-black/40">Select a note from the list or create a new one.</p>
                 </motion.div>
               </div>
             )}
@@ -274,7 +274,7 @@ export default function NotesPage() {
         </div>
 
         {error && (
-          <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+          <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-700">
             {error}
           </div>
         )}

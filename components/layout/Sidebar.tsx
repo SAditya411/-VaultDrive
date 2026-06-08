@@ -31,13 +31,13 @@ export default function Sidebar() {
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-6 pt-6 pb-8">
-        <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/30">
+      <div className="flex items-center gap-3 px-6 pt-6 pb-7">
+        <div className="w-9 h-9 rounded-xl bg-black flex items-center justify-center shadow-lg shadow-black/10">
           <Shield size={18} className="text-white" />
         </div>
         <div>
-          <h1 className="text-base font-bold text-white tracking-tight">VaultDrive</h1>
-          <p className="text-[10px] text-white/40 uppercase tracking-widest">Personal Cloud</p>
+          <h1 className="text-base font-bold text-black tracking-tight">VaultDrive</h1>
+          <p className="text-[10px] text-black/40 uppercase tracking-widest">Personal Cloud</p>
         </div>
       </div>
 
@@ -50,26 +50,26 @@ export default function Sidebar() {
               key={href}
               href={href}
               onClick={() => setMobileOpen(false)}
-              className={`relative flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
+              className={`relative flex items-center gap-3 px-4 py-3 rounded-full text-sm font-medium transition-all duration-200 group ${
                 active
                   ? 'text-white'
-                  : 'text-white/50 hover:text-white hover:bg-white/8'
+                  : 'text-black/54 hover:text-black hover:bg-white/50'
               }`}
             >
               {active && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-indigo-500/10 border border-violet-500/30 rounded-xl"
+                  className="absolute inset-0 rounded-full bg-black shadow-lg shadow-black/10"
                   transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                 />
               )}
               <Icon
                 size={18}
-                className={`relative z-10 transition-colors ${active ? 'text-violet-400' : 'text-white/40 group-hover:text-white/70'}`}
+                className={`relative z-10 transition-colors ${active ? 'text-white' : 'text-black/38 group-hover:text-black/70'}`}
               />
               <span className="relative z-10">{label}</span>
               {active && (
-                <span className="absolute right-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-violet-400" />
+                <span className="absolute right-3 top-1/2 z-10 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-white" />
               )}
             </Link>
           );
@@ -78,15 +78,15 @@ export default function Sidebar() {
 
       {/* Storage Widget */}
       <div className="p-4">
-        <div className="p-4 rounded-2xl bg-gradient-to-br from-violet-500/10 to-indigo-500/5 border border-violet-500/20">
+        <div className="p-4 rounded-3xl bg-white/48 border border-white/70 shadow-sm">
           <div className="flex items-center gap-2 mb-3">
-            <HardDrive size={14} className="text-violet-400" />
-            <span className="text-xs font-medium text-white/70">Supabase Storage</span>
+            <HardDrive size={14} className="text-black/70" />
+            <span className="text-xs font-medium text-black/70">Supabase Storage</span>
           </div>
-          <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden mb-2">
-            <div className="h-full w-0 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" />
+          <div className="w-full h-1.5 bg-black/10 rounded-full overflow-hidden mb-2">
+            <div className="h-full w-0 bg-black rounded-full" />
           </div>
-          <p className="text-[11px] text-white/40">Connect Supabase to see usage</p>
+          <p className="text-[11px] text-black/40">Connect Supabase to see usage</p>
         </div>
       </div>
     </div>
@@ -95,14 +95,14 @@ export default function Sidebar() {
   return (
     <>
       {/* Desktop sidebar */}
-      <aside className="hidden lg:flex flex-col w-64 shrink-0 h-screen sticky top-0 glass-sidebar border-r border-white/8">
+      <aside className="hidden lg:flex flex-col w-64 shrink-0 min-h-[calc(100vh-56px)] glass-sidebar border-r border-white/60">
         <SidebarContent />
       </aside>
 
       {/* Mobile hamburger */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2.5 rounded-xl glass-card border border-white/10 text-white"
+        className="lg:hidden fixed top-5 left-5 z-50 p-2.5 rounded-full glass-card border border-white/70 text-black"
       >
         <Menu size={20} />
       </button>
@@ -127,7 +127,7 @@ export default function Sidebar() {
             >
               <button
                 onClick={() => setMobileOpen(false)}
-                className="absolute top-4 right-4 p-1.5 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                className="absolute top-4 right-4 p-1.5 rounded-lg text-black/50 hover:text-black hover:bg-white/50 transition-colors"
               >
                 <X size={18} />
               </button>

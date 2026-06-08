@@ -2,18 +2,18 @@
 
 /* ============================================================
    VaultDrive — Global Styles
-   Premium dark UI with glassmorphism & Apple-inspired design
+   Soft desktop UI with glassmorphism & Apple-inspired design
    ============================================================ */
 
 @layer base {
   :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #0f0f1a;
-    --glass-bg: rgba(255, 255, 255, 0.04);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-sidebar: rgba(10, 10, 20, 0.85);
-    --accent: #8b5cf6;
-    --accent-glow: rgba(139, 92, 246, 0.25);
+    --bg-primary: #d8dce3;
+    --bg-secondary: #eef1f5;
+    --glass-bg: rgba(255, 255, 255, 0.58);
+    --glass-border: rgba(255, 255, 255, 0.72);
+    --glass-sidebar: rgba(245, 247, 250, 0.7);
+    --accent: #111317;
+    --accent-glow: rgba(17, 19, 23, 0.14);
   }
 
   * {
@@ -23,12 +23,12 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
     background-color: var(--bg-primary);
-    color: white;
+    color: #14161a;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
@@ -43,16 +43,16 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(17, 24, 39, 0.18);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(17, 24, 39, 0.28);
   }
 
   /* Selection */
   ::selection {
-    background: rgba(139, 92, 246, 0.35);
+    background: rgba(17, 19, 23, 0.18);
     color: white;
   }
 }
@@ -60,9 +60,10 @@
 /* ── Glassmorphism Utilities ─────────────────────────────── */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
   border: 1px solid var(--glass-border);
+  box-shadow: 0 24px 80px rgba(62, 70, 84, 0.12);
 }
 
 .glass-sidebar {
@@ -72,7 +73,7 @@
 }
 
 .glass-nav {
-  background: rgba(10, 10, 15, 0.8);
+  background: rgba(245, 247, 250, 0.74);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
 }
@@ -81,10 +82,63 @@
 .bg-mesh {
   background-color: var(--bg-primary);
   background-image:
-    radial-gradient(at 20% 20%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(99, 102, 241, 0.06) 0px, transparent 50%),
-    radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.04) 0px, transparent 70%);
+    radial-gradient(at 12% 16%, rgba(255, 255, 255, 0.85) 0px, transparent 38%),
+    radial-gradient(at 80% 12%, rgba(188, 196, 210, 0.58) 0px, transparent 34%),
+    linear-gradient(135deg, #c8cdd6 0%, #e7ebf1 48%, #c9ced7 100%);
   background-attachment: fixed;
+}
+
+.sugar-ui {
+  color: #15171c;
+}
+
+.sugar-ui .glass-card,
+.sugar-ui .glass-sidebar {
+  color: #15171c;
+}
+
+.sugar-ui [class*="text-white"] {
+  color: rgba(20, 23, 28, 0.82) !important;
+}
+
+.sugar-ui [class*="text-violet"],
+.sugar-ui [class*="text-indigo"] {
+  color: #15171c !important;
+}
+
+.sugar-ui .bg-gradient-to-r.text-white,
+.sugar-ui .bg-gradient-to-r [class*="text-white"],
+.sugar-ui .bg-gradient-to-br.text-white,
+.sugar-ui .bg-gradient-to-br [class*="text-white"],
+.sugar-ui .bg-black.text-white,
+.sugar-ui .bg-black [class*="text-white"],
+.sugar-ui .bg-black span,
+.sugar-ui .bg-black svg,
+.sugar-ui .bg-black,
+.sugar-ui .bg-black [class*="text-white"] {
+  color: white !important;
+}
+
+.sugar-ui nav a.text-white,
+.sugar-ui nav a.text-white svg,
+.sugar-ui nav a.text-white span {
+  color: white !important;
+}
+
+.sugar-ui .border-white\/8,
+.sugar-ui .border-white\/10,
+.sugar-ui .border-white\/15,
+.sugar-ui .border-white\/20 {
+  border-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.sugar-ui .bg-white\/4,
+.sugar-ui .bg-white\/5,
+.sugar-ui .bg-white\/6,
+.sugar-ui .bg-white\/8,
+.sugar-ui .bg-white\/10,
+.sugar-ui .bg-white\/12 {
+  background-color: rgba(255, 255, 255, 0.44) !important;
 }
 
 /* ── Typography ─────────────────────────────────────────── */
