@@ -6,7 +6,7 @@
 'use server';
 
 import { createClient } from '@supabase/supabase-js';
-import { FileRecord, FolderRecord, SortOption, StorageStats } from '@/types';
+import { FileRecord, FolderRecord, NoteRecord, SortOption, StorageStats } from '@/types';
 import { revalidatePath } from 'next/cache';
 
 function getSupabase() {
@@ -129,6 +129,56 @@ export async function deleteFolder(id: string, name: string): Promise<void> {
   if (error) throw new Error(error.message);
   revalidatePath('/folders');
   revalidatePath('/files');
+}
+
+// Notes
+
+export async function getNotes(search = ''): Promise<NoteRecord[]> {
+  const supabase = getSupabase();
+  let query = supabase.from('notes').select('*').order('updated_at', { ascending: false });
+
+  if (search.trim()) {
+    const term = `%${search.trim()}%`;
+    query = query.or(`title.ilike.${term},content.ilike.${term}`);
+  }
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data as NoteRecord[]) ?? [];
+}
+
+export async function createNote(title: string, content: string): Promise<NoteRecord> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('notes')
+    .insert({ title: title.trim(), content })
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  revalidatePath('/notes');
+  return data as NoteRecord;
+}
+
+export async function updateNote(id: string, title: string, content: string): Promise<NoteRecord> {
+  const supabase = getSupabase();
+  const { data, error } = await supabase
+    .from('notes')
+    .update({ title: title.trim(), content, updated_at: new Date().toISOString() })
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) throw new Error(error.message);
+  revalidatePath('/notes');
+  return data as NoteRecord;
+}
+
+export async function deleteNote(id: string): Promise<void> {
+  const supabase = getSupabase();
+  const { error } = await supabase.from('notes').delete().eq('id', id);
+  if (error) throw new Error(error.message);
+  revalidatePath('/notes');
 }
 
 // ─── Stats ─────────────────────────────────────────────────

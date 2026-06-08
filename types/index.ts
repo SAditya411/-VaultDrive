@@ -20,6 +20,14 @@ export interface FolderRecord {
   file_count?: number;
 }
 
+export interface NoteRecord {
+  id: string;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export type SortOption = 'date_desc' | 'date_asc' | 'size_desc' | 'size_asc' | 'name_asc' | 'name_desc';
 
 export interface UploadProgress {

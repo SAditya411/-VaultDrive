@@ -8,6 +8,7 @@ import {
   LayoutDashboard,
   Files,
   FolderOpen,
+  NotebookPen,
   Settings,
   HardDrive,
   Menu,
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/files', label: 'Files', icon: Files },
   { href: '/folders', label: 'Folders', icon: FolderOpen },
+  { href: '/notes', label: 'Notes', icon: NotebookPen },
   { href: '/settings', label: 'Settings', icon: Settings },
 ];
 

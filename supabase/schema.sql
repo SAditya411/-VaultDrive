@@ -20,9 +20,19 @@ create table if not exists public.folders (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.notes (
+  id uuid primary key default gen_random_uuid(),
+  title text not null check (length(trim(title)) > 0),
+  content text not null default '',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 create index if not exists files_uploaded_at_idx on public.files (uploaded_at desc);
 create index if not exists files_folder_name_idx on public.files (folder_name);
 create index if not exists files_file_name_idx on public.files using gin (to_tsvector('simple', file_name));
+create index if not exists notes_updated_at_idx on public.notes (updated_at desc);
+create index if not exists notes_title_idx on public.notes using gin (to_tsvector('simple', title));
 
 insert into storage.buckets (id, name, public)
 values ('vault', 'vault', true)
@@ -54,3 +64,4 @@ using (bucket_id = 'vault');
 
 alter table public.files disable row level security;
 alter table public.folders disable row level security;
+alter table public.notes disable row level security;
