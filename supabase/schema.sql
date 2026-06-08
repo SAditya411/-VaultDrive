@@ -28,5 +28,29 @@ insert into storage.buckets (id, name, public)
 values ('vault', 'vault', true)
 on conflict (id) do update set public = excluded.public;
 
+-- Public buckets only make reads public. Browser uploads still need
+-- storage.objects policies when using the anon Supabase client.
+drop policy if exists "VaultDrive public read" on storage.objects;
+drop policy if exists "VaultDrive public upload" on storage.objects;
+drop policy if exists "VaultDrive public update" on storage.objects;
+drop policy if exists "VaultDrive public delete" on storage.objects;
+
+create policy "VaultDrive public read"
+on storage.objects for select
+using (bucket_id = 'vault');
+
+create policy "VaultDrive public upload"
+on storage.objects for insert
+with check (bucket_id = 'vault');
+
+create policy "VaultDrive public update"
+on storage.objects for update
+using (bucket_id = 'vault')
+with check (bucket_id = 'vault');
+
+create policy "VaultDrive public delete"
+on storage.objects for delete
+using (bucket_id = 'vault');
+
 alter table public.files disable row level security;
 alter table public.folders disable row level security;

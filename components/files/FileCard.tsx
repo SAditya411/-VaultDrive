@@ -20,6 +20,7 @@ import {
 import { FileRecord } from '@/types';
 import { formatFileSize, formatDate, truncateFileName } from '@/lib/utils/formatters';
 import { getFileCategory, getCategoryColor } from '@/lib/utils/fileIcons';
+import { getDownloadUrl } from '@/lib/utils/downloadUrl';
 
 const ICON_MAP = {
   image: Image,
@@ -47,6 +48,7 @@ export default function FileCard({ file, onPreview, onDelete, onMove }: FileCard
   const category = getFileCategory(file.file_type);
   const colorClass = getCategoryColor(category);
   const IconComponent = ICON_MAP[category];
+  const downloadUrl = getDownloadUrl(file.file_url, file.file_name);
 
   const handleDelete = () => {
     if (confirmDelete) {
@@ -97,7 +99,7 @@ export default function FileCard({ file, onPreview, onDelete, onMove }: FileCard
                 <Eye size={14} /> Preview
               </button>
               <a
-                href={file.file_url}
+                href={downloadUrl}
                 download={file.file_name}
                 target="_blank"
                 rel="noopener noreferrer"

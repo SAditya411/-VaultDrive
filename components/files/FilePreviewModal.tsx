@@ -15,6 +15,7 @@ import {
 import { FileRecord } from '@/types';
 import { getFileCategory, isPreviewable } from '@/lib/utils/fileIcons';
 import { formatFileSize, formatDate } from '@/lib/utils/formatters';
+import { getDownloadUrl } from '@/lib/utils/downloadUrl';
 
 interface FilePreviewModalProps {
   file: FileRecord | null;
@@ -28,6 +29,7 @@ export default function FilePreviewModal({ file, isOpen, onClose }: FilePreviewM
   if (!file) return null;
   const category = getFileCategory(file.file_type);
   const previewable = isPreviewable(file.file_type);
+  const downloadUrl = getDownloadUrl(file.file_url, file.file_name);
 
   const handleZoomIn = () => setZoom((z) => Math.min(z + 0.25, 3));
   const handleZoomOut = () => setZoom((z) => Math.max(z - 0.25, 0.5));
@@ -96,7 +98,7 @@ export default function FilePreviewModal({ file, isOpen, onClose }: FilePreviewM
                 <ExternalLink size={16} />
               </a>
               <a
-                href={file.file_url}
+                href={downloadUrl}
                 download={file.file_name}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-violet-600/80 hover:bg-violet-600 text-white text-sm transition-colors"
               >
@@ -180,7 +182,7 @@ export default function FilePreviewModal({ file, isOpen, onClose }: FilePreviewM
                   <p className="text-white/30 text-sm">This file type cannot be previewed in the browser.</p>
                 </div>
                 <a
-                  href={file.file_url}
+                  href={downloadUrl}
                   download={file.file_name}
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium"
                 >
